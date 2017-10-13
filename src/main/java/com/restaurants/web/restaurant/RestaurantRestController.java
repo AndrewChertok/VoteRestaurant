@@ -1,52 +1,22 @@
 package com.restaurants.web.restaurant;
 
-import com.restaurants.model.Restaurant;
 import com.restaurants.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-
-import java.time.LocalDate;
-import java.util.List;
-
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class RestaurantRestController {
 
     @Autowired
-    @Qualifier("restaurantService")
-    private RestaurantService service;
+    private RestaurantService restaurantService;
 
-    
-    public Restaurant save(Restaurant restaurant) {
-        return service.save(restaurant);
+    @RequestMapping(value = "/restaurants", method = RequestMethod.GET)
+    public String getAll(Model model){
+        model.addAttribute("restaurants", restaurantService.getAll());
+        return "restaurants";
     }
-
-    
-    public Restaurant update(Restaurant restaurant) {
-        return service.update(restaurant);
-    }
-    
-    public void delete(int id) {
-         service.delete(id);
-    }
-
-    public Restaurant get(int id) {
-        return service.get(id);
-    }
-
-    public Restaurant getByName(String name){
-        return service.getByName(name);
-    }
-
-    
-    public List<Restaurant> getAll() {
-        return service.getAll();
-    }
-
-   public  List<Restaurant> getBetweenDates(LocalDate startDate, LocalDate endDate) {
-       return service.getBetweenDates(startDate, endDate);
-   }
-
 
 }

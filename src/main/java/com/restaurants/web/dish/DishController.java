@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 @Controller
-public class DishRestController {
+public class DishController {
 
     @Autowired
     private DishService service;

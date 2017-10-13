@@ -14,13 +14,19 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
+        <!-- Tomcat -->
+        <tomcat.version>9.0.1</tomcat.version>
+
         <!-- Spring -->
         <spring.version>5.0.0.RELEASE</spring.version>
         <spring-data.version>2.0.0.RELEASE</spring-data.version>
+        <spring-webmvc.version>4.3.9.RELEASE</spring-webmvc.version>
 
                 <!-- Logging -->
                <logback.version>1.2.3</logback.version>
                 <slf4j.version>1.7.25</slf4j.version>
+
+        <javax-jstl.version>1.2</javax-jstl.version>
 
         <!-- Hibernate -->
         <hibernate.version>5.2.11.Final</hibernate.version>
@@ -122,16 +128,22 @@
 
         <!--Web-->
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-servlet-api</artifactId>
+            <version>${tomcat.version}</version>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring-webmvc.version}</version>
         </dependency>
 
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
-            <version>1.2</version>
+            <version>${javax-jstl.version}</version>
         </dependency>
 
         <!--DB-->

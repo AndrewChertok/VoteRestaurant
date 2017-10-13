@@ -4,13 +4,13 @@ package com.restaurants.web;
 import com.restaurants.model.Dish;
 import com.restaurants.model.Restaurant;
 import com.restaurants.util.DateTimeUtil;
-import com.restaurants.web.dish.DishRestController;
-import com.restaurants.web.restaurant.RestaurantRestController;
-import com.restaurants.web.vote.VoteRestController;
+import com.restaurants.web.dish.DishController;
+import com.restaurants.web.restaurant.RestaurantController;
+import com.restaurants.web.vote.VoteController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 
 import javax.servlet.ServletConfig;
@@ -20,20 +20,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 
 public class RestaurantServlet extends HttpServlet {
 
-    private RestaurantRestController restaurantController;
+    private RestaurantController restaurantController;
 
-    private VoteRestController voteController;
+    private VoteController voteController;
 
-    private DishRestController dishController;
+    private DishController dishController;
 
-    private ConfigurableApplicationContext appCtx;
+    private WebApplicationContext appCtx;
 
     private static final Logger log = LoggerFactory.getLogger(RestaurantServlet.class);
 
@@ -41,10 +38,10 @@ public class RestaurantServlet extends HttpServlet {
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
 
-        appCtx = new ClassPathXmlApplicationContext("spring/spring-app.xml", "spring/spring-db.xml" );
-        restaurantController = appCtx.getBean(RestaurantRestController.class);
-        voteController = appCtx.getBean(VoteRestController.class);
-        dishController = appCtx.getBean(DishRestController.class);
+       appCtx = WebApplicationContextUtils.getRequiredWebApplicationContext(getServletContext());
+        restaurantController = appCtx.getBean(RestaurantController.class);
+        voteController = appCtx.getBean(VoteController.class);
+        dishController = appCtx.getBean(DishController.class);
 
 
     }
@@ -147,12 +144,6 @@ public class RestaurantServlet extends HttpServlet {
     private int getId(HttpServletRequest request) {
         String paramId = request.getParameter("id");
         return Integer.valueOf(paramId);
-    }
-
-    @Override
-    public void destroy() {
-        super.destroy();
-        appCtx.close();
     }
 
 }
