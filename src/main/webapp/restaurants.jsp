@@ -35,21 +35,25 @@
         <thead>
         <tr>
             <th>ID</th>
+            <th>Created</th>
             <th>Restaurant</th>
             <th>Dishes</th>
             <th>Votes</th>
             <th>Vote</th>
             <th>Edit</th>
+            <th>Delete</th>
         </tr>
         </thead>
         <c:forEach items="${restaurants}" var="restaurant">
             <tr >
                 <td>${restaurant.getId()}</td>
+                <td>${restaurant.getCreatedOrUpdated()}</td>
                 <td>${restaurant.getName()}</td>
-                <td>${restaurant.toString()}</td>
+                <td>${restaurant.getMenu().toString()}</td>
                 <td>${restaurant.getVotes()}</td>
                 <td><a href="restaurants?action=vote&id=${restaurant.getId()}">Vote</a></td>
                 <td><a href="restaurants?action=edit&id=${restaurant.getId()}">Edit</a></td>
+                <td><a href="restaurants?action=delete&id=${restaurant.getId()}">Delete</a></td>
             </tr>
         </c:forEach>
     </table>

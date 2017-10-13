@@ -56,20 +56,19 @@ public class RestaurantServlet extends HttpServlet {
         if("edit".equals(action)){
             String name = req.getParameter("name");
             Integer votes = Integer.valueOf(req.getParameter("votes"));
+            String[] id = req.getParameterValues("id's");
             String[] dishes = req.getParameterValues("dishes");
             String[] prices = req.getParameterValues("prices");
-            Restaurant newRestaurant = new Restaurant(name);
-            newRestaurant.setId(getId(req));
-            newRestaurant.setVotes(votes);
-            restaurantController.save(newRestaurant);
-            List<Dish> menu = new ArrayList<>();
+            Restaurant editedRestaurant = restaurantController.getByName(name);
 
-            for(int i =0; i<dishes.length;i++){
-                menu.add(new Dish(dishes[i], Double.valueOf(prices[i]), restaurantController.getByName(name)));
+            if(editedRestaurant == null) editedRestaurant = new Restaurant(name);
+
+            for(int i =0; i<id.length;i++){
+
+                Dish dish = new Dish(Integer.valueOf(id[i]), dishes[i], Double.valueOf(prices[i]), editedRestaurant);
+                dishController.save(dish);
             }
 
-
-            restaurantController.update(newRestaurant);
 
             req.setAttribute("restaurants",
                     restaurantController.getAll());
@@ -81,8 +80,8 @@ public class RestaurantServlet extends HttpServlet {
             String name = req.getParameter("name");
             String dish = req.getParameter("dish");
             String price = req.getParameter("price");
-            restaurantController.save(new Restaurant(name));
-            dishController.save(new Dish(dish, Double.valueOf(price), restaurantController.getByName(name)));
+            Restaurant saved = restaurantController.save(new Restaurant(name));
+            dishController.save(new Dish(null,dish, Double.valueOf(price), saved));
 
 
             req.setAttribute("restaurants",
@@ -127,6 +126,13 @@ public class RestaurantServlet extends HttpServlet {
             case "edit":
                request.setAttribute("restaurant", restaurantController.get(getId(request)));
                request.getRequestDispatcher("restaurant.jsp").forward(request, response);
+                break;
+
+            case "delete":
+                restaurantController.delete(getId(request));
+                request.setAttribute("restaurants",
+                        restaurantController.getAll());
+                request.getRequestDispatcher("restaurants.jsp").forward(request, response);
                 break;
             case "all":
             default:

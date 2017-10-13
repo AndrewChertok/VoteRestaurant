@@ -23,7 +23,6 @@
             <dd><input type="text" value="${restaurant.name}" name="name"></dd>
         </dl>
         <dl>
-
             <c:if test="${param.action == 'create'}">
                 <dt>Dish</dt>
                 <dd><input type="text" value="${dish.name}" size=10 name="dish" ></dd>
@@ -32,6 +31,7 @@
             </c:if>
 
         <c:forEach items="${restaurant.menu}" var="dish">
+            <input type="hidden" value="${dish.id}" name="id's" class="id's">
             <dt>Dish</dt>
             <dd><input type="text" value="${dish.name}" size=20 name="dishes" class="dishes"></dd>
             <dt>Price</dt>

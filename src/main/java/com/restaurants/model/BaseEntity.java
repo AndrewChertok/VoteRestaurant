@@ -9,11 +9,12 @@ import javax.persistence.*;
 @Access(AccessType.FIELD)
 public class BaseEntity {
 
-    public static final int START_SEQ = 1;
+    public static final int START_SEQ = 16;
 
     @Id
-    @SequenceGenerator(name = "main_seq", sequenceName = "main_seq", allocationSize = 1, initialValue = START_SEQ)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "main_seq")
+    @SequenceGenerator(name = "MAIN_SEQ", sequenceName = "MAIN_SEQ", allocationSize = 1, initialValue = START_SEQ)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "MAIN_SEQ")
+    @Access(value = AccessType.PROPERTY)
     protected Integer id;
 
     public BaseEntity() {

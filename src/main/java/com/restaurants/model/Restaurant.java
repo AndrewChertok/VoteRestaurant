@@ -48,6 +48,7 @@ public class Restaurant extends BaseEntity{
 
     }
 
+
     public Restaurant(String name, Dish... dish){
         this(name, Arrays.asList(dish));
     }
@@ -57,11 +58,15 @@ public class Restaurant extends BaseEntity{
     }
 
     public Restaurant(Integer id, String name, List<Dish> menu) {
+       this(id, name);
+       this.menu = menu;
+    }
+
+    public Restaurant(Integer id, String name){
         super(id);
-         this.name = name;
-         this.menu = menu;
-         this.votes = null;
-         this.createdOrUpdated = null;
+        this.name = name;
+        this.votes = 0;
+        this.createdOrUpdated = LocalDate.now();
     }
 
     public String getName() {
