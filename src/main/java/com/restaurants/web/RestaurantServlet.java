@@ -46,7 +46,6 @@ public class RestaurantServlet extends HttpServlet {
         voteController = appCtx.getBean(VoteRestController.class);
         dishController = appCtx.getBean(DishRestController.class);
 
-
     }
 
     @Override
@@ -90,6 +89,15 @@ public class RestaurantServlet extends HttpServlet {
 
         }
 
+        if("created".equals(action)){
+            String name = req.getParameter("dish");
+            Double price = Double.valueOf(req.getParameter("price"));
+            dishController.save(new Dish(name, price, restaurantController.get(getId(req))));
+
+            req.setAttribute("restaurant", restaurantController.get(getId(req)));
+            req.getRequestDispatcher("restaurant.jsp").forward(req, resp);
+        }
+
         if("filter".equals(action)){
             String start = req.getParameter("startDate");
             String end = req.getParameter("endDate");
@@ -110,6 +118,13 @@ public class RestaurantServlet extends HttpServlet {
 
 
         switch (action == null ? "all" : action) {
+
+            case "removed":
+                String name = request.getParameter("name");
+                dishController.delete(getId(request));
+                request.setAttribute("restaurant", restaurantController.getByName(name));
+                request.getRequestDispatcher("restaurant.jsp").forward(request, response);
+                break;
 
 
             case "vote":

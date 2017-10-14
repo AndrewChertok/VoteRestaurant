@@ -32,14 +32,25 @@
 
         <c:forEach items="${restaurant.menu}" var="dish">
             <input type="hidden" value="${dish.id}" name="id's" class="id's">
-            <dt>Dish</dt>
-            <dd><input type="text" value="${dish.name}" size=20 name="dishes" class="dishes"></dd>
-            <dt>Price</dt>
-            <dd><input type="text" value="${dish.price}" size=20 name="prices" class="prices"></dd>
+            <dt></dt>
+            <dd>Dish<input type="text" value="${dish.name}" size=20 name="dishes" class="dishes"></dd>
+            <dt></dt>
+            <dd>Price<input type="text" value="${dish.price}" size=20 name="prices" class="prices"></dd>
+            <dd><a href="restaurants?action=removed&id=${dish.id}&name=${restaurant.name}">Remove dish</a></dd>
         </dl>
         </c:forEach>
         <button type="submit">Save</button>
         <button onclick="window.history.back()" type="button">Cancel</button>
+    </form>
+    <hr>
+    <dt>Add a Dish</dt>
+    <form method="post" action="restaurants?action=created">
+        <input type="hidden" value="${restaurant.id}" name="id">
+        <dd>Dish<input type="text"  size=20 name="dish"></dd>
+        <dt></dt>
+        <dd>Price<input type="text"  size=20 name="price"></dd>
+        <hr>
+        <button type="submit">Add</button>
     </form>
 </section>
 </body>
