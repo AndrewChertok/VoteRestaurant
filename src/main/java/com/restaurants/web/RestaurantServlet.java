@@ -5,7 +5,7 @@ import com.restaurants.model.Dish;
 import com.restaurants.model.Restaurant;
 import com.restaurants.util.DateTimeUtil;
 import com.restaurants.web.dish.DishController;
-import com.restaurants.web.restaurant.RestaurantController;
+import com.restaurants.web.restaurant.AbstractRestaurantController;
 import com.restaurants.web.vote.VoteController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +24,7 @@ import java.time.LocalDate;
 
 public class RestaurantServlet extends HttpServlet {
 
-    private RestaurantController restaurantController;
+    private AbstractRestaurantController restaurantController;
 
     private VoteController voteController;
 
@@ -39,7 +39,7 @@ public class RestaurantServlet extends HttpServlet {
         super.init(config);
 
        appCtx = WebApplicationContextUtils.getRequiredWebApplicationContext(getServletContext());
-        restaurantController = appCtx.getBean(RestaurantController.class);
+        restaurantController = appCtx.getBean(AbstractRestaurantController.class);
         voteController = appCtx.getBean(VoteController.class);
         dishController = appCtx.getBean(DishController.class);
 

@@ -1,10 +1,16 @@
 package com.restaurants.web.user;
 
 import com.restaurants.model.User;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@RestController
+@RequestMapping(AdminRestController.URL)
 public class AdminRestController extends AbstractUserController{
+
+    static final String URL = "/rest/admin/users";
 
 
     @Override

@@ -21,6 +21,7 @@
         <spring.version>5.0.0.RELEASE</spring.version>
         <spring-data.version>2.0.0.RELEASE</spring-data.version>
         <spring-webmvc.version>4.3.9.RELEASE</spring-webmvc.version>
+        <spring-security.version>4.2.3.RELEASE</spring-security.version>
 
                 <!-- Logging -->
                <logback.version>1.2.3</logback.version>
@@ -106,6 +107,18 @@
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
             <version>${spring-data.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring-security.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring-security.version}</version>
         </dependency>
 
 
