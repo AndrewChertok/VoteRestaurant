@@ -8,11 +8,20 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+@SuppressWarnings("JpaQlInspection")
+@NamedQueries({
+        @NamedQuery(name = Dish.GET_ALL, query = "SELECT d FROM Dish d order by d.createdOrUpdated DESC "),
+        @NamedQuery(name = Dish.GET_BETWEEN, query = "SELECT d FROM Dish d WHERE d.createdOrUpdated BETWEEN :startDate AND :endDate ORDER BY d.createdOrUpdated DESC ")
+})
+
 
 
 @Entity
 @Table(name = "dishes")
 public class Dish extends BaseEntity{
+
+    public static final String GET_ALL = "Dish.findAll";
+    public static final String GET_BETWEEN = "Dish.getBetweenDates";
 
     @Column(name = "name", nullable = false)
     @NotEmpty
