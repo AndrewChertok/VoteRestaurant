@@ -5,11 +5,14 @@ import com.restaurants.repository.DishRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.List;
+
 @Service
 public class DishServiceImpl implements DishService {
 
-  @Autowired
-  private  DishRepository repository;
+    @Autowired
+    private  DishRepository repository;
 
 
     @Override
@@ -21,4 +24,21 @@ public class DishServiceImpl implements DishService {
     public void delete(Integer id) {
         repository.delete(id);
     }
+
+
+    @Override
+    public Dish getById(Integer id) {
+        return repository.getById(id);
+    }
+
+    @Override
+    public List<Dish> getAll() {
+        return repository.getAll();
+    }
+
+    @Override
+    public List<Dish> getBetweenDates(LocalDate startDate, LocalDate endDate) {
+        return repository.getBetweenDates(startDate, endDate);
+    }
+
 }
