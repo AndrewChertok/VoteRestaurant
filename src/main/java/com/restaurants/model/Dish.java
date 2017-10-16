@@ -1,6 +1,7 @@
 package com.restaurants.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
@@ -24,7 +25,7 @@ public class Dish extends BaseEntity{
 
     @JoinColumn(name = "restaurant_id", nullable = false)
     @NotNull
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Restaurant restaurant;
 
     public Dish(){

@@ -28,6 +28,7 @@
                 <slf4j.version>1.7.25</slf4j.version>
 
         <javax-jstl.version>1.2</javax-jstl.version>
+        <jackson-json.version>2.9.2</jackson-json.version>
 
         <!-- Hibernate -->
         <hibernate.version>5.2.11.Final</hibernate.version>
@@ -157,6 +158,24 @@
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
             <version>${javax-jstl.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson-json.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-hibernate5</artifactId>
+            <version>${jackson-json.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>${jackson-json.version}</version>
         </dependency>
 
         <!--DB-->

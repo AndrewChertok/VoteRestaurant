@@ -29,8 +29,8 @@ public interface CrudRestaurantRepository extends JpaRepository<Restaurant, Inte
     @Query("SELECT r FROM Restaurant r WHERE r.name = ?1")
     Restaurant getByName(String name);
 
-    @Query("SELECT r FROM Restaurant r order by r.createdOrUpdated DESC ")
-    List<Restaurant> findAll();
+    @Query("SELECT r FROM Restaurant r LEFT JOIN r.menu order by r.createdOrUpdated DESC ")
+    List<Restaurant> getAll();
 
     @Query("SELECT r FROM Restaurant r WHERE r.createdOrUpdated BETWEEN :startDate AND :endDate ORDER BY r.createdOrUpdated DESC ")
     List<Restaurant> getBetweenDates(@Param("startDate")LocalDate startDate, @Param("endDate")LocalDate endDate);

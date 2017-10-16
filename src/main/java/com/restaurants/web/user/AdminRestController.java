@@ -10,7 +10,7 @@ import java.util.List;
 @RequestMapping(AdminRestController.URL)
 public class AdminRestController extends AbstractUserController{
 
-    static final String URL = "/rest/admin/users";
+    static final String URL = "/admin/users";
 
 
     @Override

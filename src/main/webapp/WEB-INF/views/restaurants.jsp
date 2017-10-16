@@ -7,7 +7,7 @@
 </head>
 <body>
 <hr>
-    <h3><a href="index.html">Home</a></h3>
+    <h3><a href="second.html">Home</a></h3>
     <h2>Vote for Restaurant</h2>
     <hr/>
 

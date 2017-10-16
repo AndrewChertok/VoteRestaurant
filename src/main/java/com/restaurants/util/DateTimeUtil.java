@@ -1,12 +1,14 @@
 package com.restaurants.util;
 
-import org.springframework.cglib.core.Local;
 import org.springframework.util.StringUtils;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class DateTimeUtil {
+
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     public static boolean isTillExpiredTime(LocalTime expiredTime){
         return LocalTime.now().isBefore(expiredTime);
@@ -24,6 +26,10 @@ public class DateTimeUtil {
 
     public static LocalDate parseLocalDate(String date){
         return StringUtils.isEmpty(date) ?  null : LocalDate.parse(date);
+    }
+
+    public static String toString(LocalDate localDate) {
+        return localDate == null ? "" : localDate.format(DATE_FORMATTER);
     }
 
 

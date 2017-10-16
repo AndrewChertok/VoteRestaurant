@@ -1,5 +1,6 @@
 package com.restaurants.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.util.CollectionUtils;
 
 import javax.persistence.*;
@@ -48,6 +49,7 @@ public class User extends BaseEntity{
         private Integer restaurantId;
 
         @Column(name = "voted")
+        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
         private LocalDate voteDate;
 
     public User() {

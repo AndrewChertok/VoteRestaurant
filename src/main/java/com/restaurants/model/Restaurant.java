@@ -1,6 +1,8 @@
 package com.restaurants.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -33,12 +35,12 @@ public class Restaurant extends BaseEntity{
     private String name;
 
     @CollectionTable(name = "dishes", joinColumns = @JoinColumn(name = "restaurant_id"))
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "restaurant")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
+    @JsonIgnore
     private List<Dish> menu;
 
     @Column(name = "votes")
     private Integer votes;
-
 
     @Column(name = "created", columnDefinition = "DATE")
     @NotNull

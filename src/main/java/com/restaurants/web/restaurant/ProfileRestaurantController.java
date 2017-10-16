@@ -8,13 +8,12 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.List;
 
-import static com.restaurants.web.restaurant.AdminRestaurantController.URL;
 
 @RestController
-@RequestMapping(URL)
+@RequestMapping(ProfileRestaurantController.URL)
 public class ProfileRestaurantController extends AbstractRestaurantController {
 
-    static final String URL = "/rest/restaurants";
+    static final String URL = "/restaurants";
 
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
@@ -28,7 +27,7 @@ public class ProfileRestaurantController extends AbstractRestaurantController {
         return super.get(id);
     }
 
-    @GetMapping(value = "/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/byName/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Restaurant getByName(@PathVariable("name")String name){
         return super.getByName(name);
     }

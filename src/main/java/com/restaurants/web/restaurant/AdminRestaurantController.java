@@ -1,8 +1,6 @@
 package com.restaurants.web.restaurant;
 
 import com.restaurants.model.Restaurant;
-import com.restaurants.service.RestaurantService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -13,13 +11,12 @@ import java.net.URI;
 import java.time.LocalDate;
 import java.util.List;
 
-import static com.restaurants.web.restaurant.AdminRestaurantController.URL;
 
 @RestController
-@RequestMapping(URL)
+@RequestMapping(AdminRestaurantController.URL)
 public class AdminRestaurantController extends AbstractRestaurantController{
 
-    static final String URL = "/rest/admin/restaurants";
+    static final String URL = "/admin/restaurants";
 
 
    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
@@ -62,7 +59,7 @@ public class AdminRestaurantController extends AbstractRestaurantController{
         return super.get(id);
     }
 
-    @GetMapping(value = "/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/byName/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Restaurant getByName(@PathVariable("name")String name){
         return super.getByName(name);
     }

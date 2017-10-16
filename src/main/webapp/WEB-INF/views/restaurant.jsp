@@ -9,7 +9,7 @@
 </head>
 <body>
 <section>
-    <h3><a href="index.html">Home</a></h3>
+    <h3><a href="second.html">Home</a></h3>
 
     <h2>${param.action == 'create' ? 'Create restaurant' : 'Edit restaurant'}</h2>
     <hr>

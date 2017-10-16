@@ -11,15 +11,13 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Service
 public class VoteServiceImpl implements VoteService {
 
-    private static final LocalTime EXPIRED_TIME = LocalTime.parse("23:00");
+    private static final LocalTime EXPIRED_TIME = LocalTime.parse("11:00");
 
-    private static int count = 0;
 
     @Autowired
     @Qualifier("jpaRestaurantRepository")
@@ -49,31 +47,31 @@ public class VoteServiceImpl implements VoteService {
         if(DateTimeUtil.isSameDay(lastVote , LocalDate.now())){
             if(DateTimeUtil.isTillExpiredTime(EXPIRED_TIME)){
                 if(restHaveVoted == null){
-                    return voteFirstTime(votingUser, restaurant, restaurant.getVotes());
+                    return voteWithoutDecrement(votingUser, restaurant, restaurant.getVotes());
                 } else if(!restaurant.getName().equalsIgnoreCase(restHaveVoted.getName())){
-                    return voteOtherTimes(votingUser, restaurant, restHaveVoted);
+                    return voteWithDecrement(votingUser, restaurant, restHaveVoted);
                 } else return false;
 
             }else return false;
 
         } else {
             if(DateTimeUtil.isTillExpiredTime(EXPIRED_TIME)){
-               return voteOtherTimes(votingUser, restaurant, restHaveVoted);
+               return voteWithoutDecrement(votingUser, restaurant, restaurant.getVotes());
             } else return false;
         }
     }
 
 
-    private boolean voteOtherTimes(User votingUser, Restaurant restaurant, Restaurant restHaveVoted){
+    private boolean voteWithDecrement(User votingUser, Restaurant restaurant, Restaurant restHaveVoted){
         Integer votesNewRest = restaurant.getVotes();
             Integer votesOldRest = restHaveVoted.getVotes();
-            voteFirstTime(votingUser, restaurant, votesNewRest);
+            voteWithoutDecrement(votingUser, restaurant, votesNewRest);
             restaurantRepository.setVotes(--votesOldRest, restHaveVoted.getId());
             return true;
     }
 
 
-    private boolean voteFirstTime(User votingUser, Restaurant restaurant, Integer votesNewRest){
+    private boolean voteWithoutDecrement(User votingUser, Restaurant restaurant, Integer votesNewRest){
         userRepository.setRestaurantVoted(restaurant.getId(),votingUser.getId());
         restaurantRepository.setVotes(++votesNewRest, restaurant.getId());
         return true;
