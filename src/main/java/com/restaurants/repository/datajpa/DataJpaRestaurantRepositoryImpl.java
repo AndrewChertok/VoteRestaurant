@@ -45,7 +45,13 @@ public class DataJpaRestaurantRepositoryImpl implements RestaurantRepository {
         return restaurantRepository.getBetweenDates(startDate, endDate);
     }
 
+    @Override
     public void setVotes(Integer vote, Integer restId){
         restaurantRepository.setVotes(vote, restId);
+    }
+
+    @Override
+    public void setCreated(LocalDate created, Integer id) {
+        restaurantRepository.setDate(created, id);
     }
 }

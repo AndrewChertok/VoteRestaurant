@@ -40,4 +40,11 @@ public interface CrudRestaurantRepository extends JpaRepository<Restaurant, Inte
     @Query("UPDATE Restaurant r set r.votes = ?1 WHERE r.id = ?2")
     void setVotes(Integer vote, Integer restId);
 
+
+
+    @Modifying
+    @Transactional
+    @Query("UPDATE Restaurant r set r.createdOrUpdated = ?1 WHERE r.id = ?2")
+    void setDate(LocalDate created, Integer restId);
+
 }

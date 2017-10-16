@@ -25,4 +25,8 @@ public interface RestaurantRepository {
         return null;
     }
 
+    default void setCreated(LocalDate created, Integer id){
+
+    }
+
 }

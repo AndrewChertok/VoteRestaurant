@@ -1,11 +1,13 @@
 package com.restaurants.web;
 
 
+import com.restaurants.AuthorizedUser;
 import com.restaurants.model.Dish;
 import com.restaurants.model.Restaurant;
 import com.restaurants.util.DateTimeUtil;
 import com.restaurants.web.dish.DishRestController;
 import com.restaurants.web.restaurant.RestaurantRestController;
+import com.restaurants.web.user.AdminRestController;
 import com.restaurants.web.vote.VoteRestController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +33,8 @@ public class RestaurantServlet extends HttpServlet {
 
     private VoteRestController voteController;
 
+    private AdminRestController adminRestController;
+
     private DishRestController dishController;
 
     private ConfigurableApplicationContext appCtx;
@@ -45,6 +49,7 @@ public class RestaurantServlet extends HttpServlet {
         restaurantController = appCtx.getBean(RestaurantRestController.class);
         voteController = appCtx.getBean(VoteRestController.class);
         dishController = appCtx.getBean(DishRestController.class);
+        adminRestController = appCtx.getBean(AdminRestController.class);
 
     }
 
@@ -69,8 +74,17 @@ public class RestaurantServlet extends HttpServlet {
             }
 
 
-            req.setAttribute("restaurants",
-                    restaurantController.getAll());
+            LocalDate createdOrUpdated = DateTimeUtil.parseLocalDate(req.getParameter("createdOrUpdated"));
+            LocalDate voteDate = DateTimeUtil.parseLocalDate(req.getParameter("voteDate"));
+
+            adminRestController.setDateVote(voteDate);
+            restaurantController.setCreated(createdOrUpdated, getId(req));
+
+
+
+
+            req.setAttribute("dishes",
+                    dishController.getAll());
             req.getRequestDispatcher("restaurants.jsp").forward(req, resp);
 
         }
@@ -83,8 +97,8 @@ public class RestaurantServlet extends HttpServlet {
             dishController.save(new Dish(null,dish, Double.valueOf(price), saved));
 
 
-            req.setAttribute("restaurants",
-                    restaurantController.getAll());
+            req.setAttribute("dishes",
+                    dishController.getAll());
             req.getRequestDispatcher("restaurants.jsp").forward(req, resp);
 
         }
@@ -94,6 +108,7 @@ public class RestaurantServlet extends HttpServlet {
             Double price = Double.valueOf(req.getParameter("price"));
             dishController.save(new Dish(name, price, restaurantController.get(getId(req))));
 
+            req.setAttribute("user", adminRestController.get(2));
             req.setAttribute("restaurant", restaurantController.get(getId(req)));
             req.getRequestDispatcher("restaurant.jsp").forward(req, resp);
         }
@@ -103,7 +118,7 @@ public class RestaurantServlet extends HttpServlet {
             String end = req.getParameter("endDate");
             LocalDate startDate = DateTimeUtil.parseLocalDate(start);
             LocalDate endDate = DateTimeUtil.parseLocalDate(end);
-            req.setAttribute("restaurants", restaurantController.getBetweenDates(startDate,
+            req.setAttribute("dishes", dishController.getBetweenDates(startDate,
                     endDate));
             req.getRequestDispatcher("restaurants.jsp").forward(req, resp);
         }
@@ -129,8 +144,8 @@ public class RestaurantServlet extends HttpServlet {
 
             case "vote":
                voteController.vote(getId(request));
-                request.setAttribute("restaurants",
-                        restaurantController.getAll());
+                request.setAttribute("dishes",
+                        dishController.getAll());
                 request.getRequestDispatcher("restaurants.jsp").forward(request, response);
                 break;
 
@@ -139,21 +154,22 @@ public class RestaurantServlet extends HttpServlet {
                 break;
 
             case "edit":
+                request.setAttribute("user", adminRestController.get(AuthorizedUser.id()));
                request.setAttribute("restaurant", restaurantController.get(getId(request)));
                request.getRequestDispatcher("restaurant.jsp").forward(request, response);
                 break;
 
             case "delete":
                 restaurantController.delete(getId(request));
-                request.setAttribute("restaurants",
-                        restaurantController.getAll());
+                request.setAttribute("dishes",
+                        dishController.getAll());
                 request.getRequestDispatcher("restaurants.jsp").forward(request, response);
                 break;
             case "all":
             default:
                 log.info("getAll");
-                request.setAttribute("restaurants",
-                        restaurantController.getAll());
+                request.setAttribute("dishes",
+                        dishController.getAll());
                 request.getRequestDispatcher("restaurants.jsp").forward(request, response);
                 break;
         }

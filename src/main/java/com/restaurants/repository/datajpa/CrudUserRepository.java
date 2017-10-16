@@ -39,4 +39,9 @@ public interface CrudUserRepository extends JpaRepository<User, Integer>{
 
 
 
+    @Modifying
+    @Transactional
+    @Query("UPDATE User u set u.voteDate = ?1 WHERE u.id = ?2")
+    void setDateVote(LocalDate voteDate, Integer userId);
+
 }

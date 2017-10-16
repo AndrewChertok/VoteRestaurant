@@ -21,6 +21,10 @@
         <dl>
             <dt>Restaurant</dt>
             <dd><input type="text" value="${restaurant.name}" name="name"></dd>
+            <dt>Created</dt>
+            <dd><input type="text" value="${restaurant.createdOrUpdated}" name="createdOrUpdated"></dd>
+            <dt>Last Vote</dt>
+            <dd><input type="text" value="${user.getVoteDate()}" name="voteDate"></dd>
         </dl>
         <dl>
             <c:if test="${param.action == 'create'}">

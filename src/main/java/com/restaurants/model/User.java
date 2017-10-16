@@ -13,7 +13,9 @@ import java.util.*;
 @SuppressWarnings("JpaQlInspection")
 @NamedQueries({
         @NamedQuery(name = User.BY_EMAIL, query = "SELECT u FROM User u LEFT JOIN FETCH u.roles WHERE u.email=?1"),
-        @NamedQuery(name = User.VOTE_RESTAURANT, query = "UPDATE User u set u.restaurantId = ?1, u.voteDate = ?3 WHERE u.id = ?2")
+        @NamedQuery(name = User.VOTE_RESTAURANT, query = "UPDATE User u set u.restaurantId = ?1, u.voteDate = ?3 WHERE u.id = ?2"),
+
+        @NamedQuery(name = User.SET_CREATED, query = "UPDATE User u set u.voteDate = ?1 WHERE u.id = ?2")
 })
 
 @Entity
@@ -22,6 +24,7 @@ public class User extends BaseEntity{
 
     public static final String BY_EMAIL = "User.getByEmail";
     public static final String VOTE_RESTAURANT = "User.voteRestaurant";
+    public static final String SET_CREATED = "User.setDateVote";
 
         @NotEmpty
         @Column(name = "name", nullable = false)

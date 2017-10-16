@@ -15,7 +15,8 @@ import java.util.List;
         @NamedQuery(name = Restaurant.GET, query = "SELECT r FROM Restaurant r LEFT JOIN FETCH r.menu WHERE r.id = :id"),
         @NamedQuery(name = Restaurant.GET_BETWEEN, query = "SELECT r FROM Restaurant r WHERE r.createdOrUpdated BETWEEN :startdate AND :endDate ORDER BY r.createdOrUpdated DESC "),
         @NamedQuery(name = Restaurant.SET_VOTE, query ="UPDATE Restaurant r set r.votes = ?1 WHERE r.id = ?2"),
-        @NamedQuery(name = Restaurant.GET_BY_NAME, query ="SELECT r FROM Restaurant r WHERE r.name = ?1")
+        @NamedQuery(name = Restaurant.GET_BY_NAME, query ="SELECT r FROM Restaurant r WHERE r.name = ?1"),
+        @NamedQuery(name = Restaurant.SET_DATE_VOTE, query ="UPDATE Restaurant r set r.createdOrUpdated = ?1 WHERE r.id = ?2")
 })
 
 @Entity
@@ -27,6 +28,7 @@ public class Restaurant extends BaseEntity{
     public static final String GET_BY_NAME = "Restaurant.getByName";
     public static final String GET_ALL = "Restaurant.findAll";
     public static final String SET_VOTE = "Restaurant.setVotes";
+    public static final String SET_DATE_VOTE = "Restaurant.setDateVotes";
 
     @Column(name = "name", nullable = false)
     @NotEmpty

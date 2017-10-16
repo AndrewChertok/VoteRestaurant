@@ -1,9 +1,14 @@
 package com.restaurants.web.user;
 
+import com.restaurants.AuthorizedUser;
 import com.restaurants.model.User;
+import org.springframework.stereotype.Controller;
 
+import javax.persistence.Column;
+import java.time.LocalDate;
 import java.util.List;
 
+@Controller
 public class AdminRestController extends AbstractUserController{
 
 
@@ -14,7 +19,7 @@ public class AdminRestController extends AbstractUserController{
 
     @Override
     public User get(int id) {
-        return super.get(id);
+        return super.get(AuthorizedUser.id());
     }
 
     @Override
@@ -24,16 +29,21 @@ public class AdminRestController extends AbstractUserController{
 
     @Override
     public void delete(int id) {
-        super.delete(id);
+        super.delete(AuthorizedUser.id());
     }
 
     @Override
-    public void update(User user, int id) {
-        super.update(user, id);
+    public void update(User user) {
+        super.update(user);
     }
 
     @Override
     public User getByMail(String email) {
         return super.getByMail(email);
+    }
+
+
+    public void setDateVote(LocalDate dateVote) {
+        super.setDateVote(dateVote);
     }
 }

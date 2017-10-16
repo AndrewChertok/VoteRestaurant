@@ -41,7 +41,13 @@ public class DataJpaUserRepositoryImpl implements UserRepository {
     }
 
 
+    @Override
     public void setRestaurantVoted(Integer restId, Integer userId){
         userRepository.setRestaurantVoted(restId, userId, LocalDate.now());
+    }
+
+    @Override
+    public void setDateVote(LocalDate dateVote, Integer id) {
+        userRepository.setDateVote(dateVote, id);
     }
 }

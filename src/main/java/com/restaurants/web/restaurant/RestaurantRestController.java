@@ -49,4 +49,7 @@ public class RestaurantRestController {
    }
 
 
+    public void setCreated(LocalDate created, Integer id) {
+        service.setCreated(created, id);
+    }
 }

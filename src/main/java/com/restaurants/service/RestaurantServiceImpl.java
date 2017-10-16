@@ -58,4 +58,8 @@ public class RestaurantServiceImpl implements RestaurantService {
         return repository.getBetweenDates(startDate, endDate);
     }
 
+    @Override
+    public void setCreated(LocalDate created, Integer id) {
+        repository.setCreated(created, id);
+    }
 }

@@ -1,5 +1,6 @@
 package com.restaurants.web.user;
 
+import com.restaurants.AuthorizedUser;
 import com.restaurants.model.User;
 import com.restaurants.service.UserService;
 import org.slf4j.Logger;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -40,7 +42,8 @@ public class AbstractUserController {
         service.delete(id);
     }
 
-    public void update(User user, int id) {
+    public void update(User user) {
+        int id = AuthorizedUser.id();
         log.info("update {} with id={}", user, id);
         service.update(user);
     }
@@ -48,5 +51,11 @@ public class AbstractUserController {
     public User getByMail(String email) {
         log.info("getByEmail {}", email);
         return service.getByEmail(email);
+    }
+
+
+    public void setDateVote(LocalDate dateVote) {
+        int id = AuthorizedUser.id();
+        service.setDateVote(dateVote, id);
     }
 }

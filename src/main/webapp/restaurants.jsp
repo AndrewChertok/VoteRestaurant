@@ -44,16 +44,18 @@
             <th>Delete</th>
         </tr>
         </thead>
-        <c:forEach items="${restaurants}" var="restaurant">
+
+        <c:forEach items="${dishes}" var="dish">
+            <jsp:useBean id="dish" type="com.restaurants.model.Dish" scope="page"/>
             <tr >
-                <td>${restaurant.getId()}</td>
-                <td>${restaurant.getCreatedOrUpdated()}</td>
-                <td>${restaurant.getName()}</td>
-                <td>${restaurant.getMenu().toString()}</td>
-                <td>${restaurant.getVotes()}</td>
-                <td><a href="restaurants?action=vote&id=${restaurant.getId()}">Vote</a></td>
-                <td><a href="restaurants?action=edit&id=${restaurant.getId()}">Edit</a></td>
-                <td><a href="restaurants?action=delete&id=${restaurant.getId()}">Delete</a></td>
+                <td>${dish.restaurant.id}</td>
+                <td>${dish.restaurant.createdOrUpdated}</td>
+                <td>${dish.restaurant.name}</td>
+                <td>${dish.restaurant.menu}</td>
+                <td>${dish.restaurant.votes}</td>
+                <td><a href="restaurants?action=vote&id=${dish.restaurant.id}">Vote</a></td>
+                <td><a href="restaurants?action=edit&id=${dish.restaurant.id}">Edit</a></td>
+                <td><a href="restaurants?action=delete&id=${dish.restaurant.id}">Delete</a></td>
             </tr>
         </c:forEach>
     </table>

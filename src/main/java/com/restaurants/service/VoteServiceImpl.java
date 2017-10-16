@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Service
@@ -42,38 +41,47 @@ public class VoteServiceImpl implements VoteService {
         User votingUser = userRepository.get(userId);
         LocalDate lastVote = votingUser.getVoteDate() == null ? null : votingUser.getVoteDate();
         Restaurant restaurant = restaurantRepository.get(id);
-        Restaurant restHaveVoted = votingUser.getRestaurantId() == null ? null : restaurantRepository.get(votingUser.getRestaurantId()) ;
+        Restaurant restHaveVoted = votingUser.getRestaurantId() == null ? null : restaurantRepository.get(votingUser.getRestaurantId());
 
 
-
-        if(DateTimeUtil.isSameDay(lastVote , LocalDate.now())){
-            if(DateTimeUtil.isTillExpiredTime(EXPIRED_TIME)){
-                if(restHaveVoted == null){
-                    return voteFirstTime(votingUser, restaurant, restaurant.getVotes());
-                } else if(!restaurant.getName().equalsIgnoreCase(restHaveVoted.getName())){
+        if (DateTimeUtil.isSameDay(lastVote, LocalDate.now())) {
+            if (DateTimeUtil.isTillExpiredTime(EXPIRED_TIME)) {
+                if (restHaveVoted == null) {
+                    return voteWithoutDecrement(votingUser, restaurant, restaurant.getVotes());
+                } else if (!restaurant.getName().equalsIgnoreCase(restHaveVoted.getName())) {
                     return voteOtherTimes(votingUser, restaurant, restHaveVoted);
                 } else return false;
 
-            }else return false;
-
-        } else {
-            if(DateTimeUtil.isTillExpiredTime(EXPIRED_TIME)){
-               return voteOtherTimes(votingUser, restaurant, restHaveVoted);
             } else return false;
-        }
+
+        } else if(DateTimeUtil.isTillExpiredTime(EXPIRED_TIME)){
+           return voteWithoutDecrement(votingUser, restaurant, restaurant.getVotes());
+        } else return false;
+
+
     }
+
+
+
+
+
+
+
 
 
     private boolean voteOtherTimes(User votingUser, Restaurant restaurant, Restaurant restHaveVoted){
         Integer votesNewRest = restaurant.getVotes();
             Integer votesOldRest = restHaveVoted.getVotes();
-            voteFirstTime(votingUser, restaurant, votesNewRest);
+            voteWithoutDecrement(votingUser, restaurant, votesNewRest);
             restaurantRepository.setVotes(--votesOldRest, restHaveVoted.getId());
+
+            System.out.println("----------------"+"VotesNewRest"+votesNewRest+"----------------");
+        System.out.println("----------------"+"VotesOldRest"+votesOldRest+"----------------");
             return true;
     }
 
 
-    private boolean voteFirstTime(User votingUser, Restaurant restaurant, Integer votesNewRest){
+    private boolean voteWithoutDecrement(User votingUser, Restaurant restaurant, Integer votesNewRest){
         userRepository.setRestaurantVoted(restaurant.getId(),votingUser.getId());
         restaurantRepository.setVotes(++votesNewRest, restaurant.getId());
         return true;

@@ -21,4 +21,8 @@ public interface RestaurantService {
 
     List<Restaurant> getBetweenDates(LocalDate startDate, LocalDate endDate);
 
+    void setCreated(LocalDate created, Integer id);
+
+
+
 }

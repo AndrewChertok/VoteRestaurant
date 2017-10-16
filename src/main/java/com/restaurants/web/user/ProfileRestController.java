@@ -2,8 +2,9 @@ package com.restaurants.web.user;
 
 import com.restaurants.AuthorizedUser;
 import com.restaurants.model.User;
+import org.springframework.stereotype.Controller;
 
-
+@Controller
 public class ProfileRestController extends AbstractUserController{
 
     public void delete() {
@@ -15,7 +16,7 @@ public class ProfileRestController extends AbstractUserController{
     }
     
     public void update(User user) {
-        super.update(user, AuthorizedUser.id());
+        super.update(user);
     }
 
 

@@ -2,6 +2,7 @@ package com.restaurants.repository;
 
 import com.restaurants.model.User;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -18,6 +19,11 @@ public interface UserRepository {
     List<User> getAll();
 
   default void setRestaurantVoted(Integer restId, Integer userId){
+
+  }
+
+
+  default void setDateVote(LocalDate dateVote, Integer id){
 
   }
 
