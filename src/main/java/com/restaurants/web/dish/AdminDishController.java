@@ -2,6 +2,8 @@ package com.restaurants.web.dish;
 
 import com.restaurants.model.Dish;
 import com.restaurants.model.Restaurant;
+import com.restaurants.service.RestaurantService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -19,9 +21,14 @@ public class AdminDishController extends AbstractDishController{
 
     static final String URL = "/dish/admin";
 
+    @Autowired
+    private RestaurantService restaurantService;
 
-    @PostMapping(value = "/create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Dish> adminSave(@RequestBody Dish dish){
+
+    @PostMapping(value = "/create/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Dish> adminSave(@RequestBody Dish dish, @PathVariable("id") Integer restaurantId){
+
+        dish.setRestaurant(restaurantService.get(restaurantId));
 
         Dish created = super.save(dish);
 
@@ -50,11 +57,11 @@ public class AdminDishController extends AbstractDishController{
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Dish getById(@PathVariable("id")Integer id){
+    public Dish getById(@PathVariable("id") Integer id){
         return super.getById(id);
     }
 
-    @GetMapping(value = "/dishes", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Dish> getAll(){
         return super.getAll();
     }

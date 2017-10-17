@@ -36,7 +36,6 @@ public class Restaurant extends BaseEntity{
 
     @CollectionTable(name = "dishes", joinColumns = @JoinColumn(name = "restaurant_id"))
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
-    @JsonIgnore
     private List<Dish> menu;
 
     @Column(name = "votes")
@@ -44,12 +43,16 @@ public class Restaurant extends BaseEntity{
 
     @Column(name = "created", columnDefinition = "DATE")
     @NotNull
-    private LocalDate createdOrUpdated;
+    private LocalDate createdOrUpdated = LocalDate.now();
 
     public Restaurant(){
 
     }
 
+    public Restaurant(String name){
+        this(null, name);
+
+    }
 
     public Restaurant(String name, Dish... dish){
         this(name, Arrays.asList(dish));
@@ -68,7 +71,6 @@ public class Restaurant extends BaseEntity{
         super(id);
         this.name = name;
         this.votes = 0;
-        this.createdOrUpdated = LocalDate.now();
     }
 
     public String getName() {

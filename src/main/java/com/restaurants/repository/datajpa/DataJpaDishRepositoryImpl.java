@@ -21,7 +21,7 @@ public class DataJpaDishRepositoryImpl implements DishRepository {
 
     @Override
     public Dish getById(Integer id) {
-        return repository.findById(id).get();
+        return repository.getWithRestaurant(id);
     }
 
     @Override

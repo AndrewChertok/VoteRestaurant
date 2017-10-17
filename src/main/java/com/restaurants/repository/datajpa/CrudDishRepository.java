@@ -23,8 +23,8 @@ public interface CrudDishRepository extends JpaRepository<Dish, Integer>{
     @Override
     void deleteById(Integer id);
 
-    @Override
-    Optional<Dish> findById(Integer id);
+    @Query("SELECT d FROM Dish d LEFT JOIN FETCH d.restaurant WHERE d.id = ?1")
+    Dish getWithRestaurant(Integer id);
 
     @Transactional
     @Modifying

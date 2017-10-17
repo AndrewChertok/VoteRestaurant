@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping(ProfileDishController.URL)
 public class ProfileDishController extends AbstractDishController{
     
-    static final String URL = "/dish";
+    static final String URL = "/dish/profile";
     
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)

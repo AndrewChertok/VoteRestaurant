@@ -11,7 +11,7 @@ import org.springframework.stereotype.Controller;
 import java.time.LocalDate;
 import java.util.List;
 
-@Controller
+
 public abstract class AbstractDishController {
 
     protected final Logger log = LoggerFactory.getLogger(getClass());

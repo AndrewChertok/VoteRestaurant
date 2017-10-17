@@ -59,6 +59,10 @@ public class User extends BaseEntity{
         this(u.getId(), u.getName(), u.getEmail(), u.getPassword(), u.getRoles());
     }
 
+    public User(String name, String email, String password, Role role, Role... roles) {
+        this(null, name, email, password, EnumSet.of( role, roles));
+    }
+
     public User(Integer id, String name, String email, String password, Role role, Role... roles) {
         this(id, name, email, password, EnumSet.of( role, roles));
     }

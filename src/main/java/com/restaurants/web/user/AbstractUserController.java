@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 
 import java.util.List;
 
-@Controller
+
 public abstract class AbstractUserController {
 
     protected final Logger log = LoggerFactory.getLogger(getClass());

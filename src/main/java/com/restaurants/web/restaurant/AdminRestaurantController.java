@@ -59,7 +59,7 @@ public class AdminRestaurantController extends AbstractRestaurantController{
         return super.get(id);
     }
 
-    @GetMapping(value = "/byName/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/byname/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Restaurant getByName(@PathVariable("name")String name){
         return super.getByName(name);
     }

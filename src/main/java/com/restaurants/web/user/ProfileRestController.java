@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = ProfileRestController.URL)
 public class ProfileRestController extends AbstractUserController{
 
-    static final String URL = "/user";
+    static final String URL = "/user/profile";
 
     @DeleteMapping(value = "/delete")
     public void delete() {

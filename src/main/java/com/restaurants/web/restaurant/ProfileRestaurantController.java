@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping(ProfileRestaurantController.URL)
 public class ProfileRestaurantController extends AbstractRestaurantController {
 
-    static final String URL = "/restaurant";
+    static final String URL = "/restaurant/profile";
 
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
@@ -27,7 +27,7 @@ public class ProfileRestaurantController extends AbstractRestaurantController {
         return super.get(id);
     }
 
-    @GetMapping(value = "/byName/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/byname/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Restaurant getByName(@PathVariable("name")String name){
         return super.getByName(name);
     }

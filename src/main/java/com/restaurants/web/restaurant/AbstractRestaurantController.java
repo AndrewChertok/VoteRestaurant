@@ -12,7 +12,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 
-@Controller
+
 public abstract class AbstractRestaurantController {
 
     protected final Logger log = LoggerFactory.getLogger(getClass());

@@ -58,8 +58,8 @@ public class JsonLocalDateConverter {
         }
 
         @Override
-        public Class<LocalDateTime> handledType() {
-            return LocalDateTime.class;
+        public Class<LocalDate> handledType() {
+            return LocalDate.class;
         }
     }
 }

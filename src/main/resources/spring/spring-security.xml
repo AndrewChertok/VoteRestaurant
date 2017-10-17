@@ -9,18 +9,15 @@
 
     <http>
         <intercept-url pattern="/login" access="isAnonymous()"/>
-        <intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/**/admin/**" access="hasRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/**" access="isAuthenticated()"/>
-        <form-login/>
+        <http-basic/>
         <csrf disabled="true"/>
     </http>
 
     <authentication-manager>
-        <authentication-provider>
-            <user-service>
-                <user name="user@gmail.ru" password="user" authorities="ROLE_USER"/>
-                <user name="admin@gmail.com" password="admin" authorities="ROLE_ADMIN"/>
-            </user-service>
+        <authentication-provider user-service-ref="userService">
+
         </authentication-provider>
     </authentication-manager>
 </beans:beans>
