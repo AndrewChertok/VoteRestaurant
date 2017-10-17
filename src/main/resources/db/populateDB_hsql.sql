@@ -28,7 +28,7 @@ INSERT INTO RESTAURANTS (NAME, VOTES, CREATED, ID) VALUES
 INSERT INTO dishes (NAME, PRICE, RESTAURANT_ID, ID) VALUES
   ('Fish', 55, 4, 9),
   ('Meat', 44, 4, 10),
-  ('Roastbeaf', 99, 5, 11),
+  ('Roastbeef', 99, 5, 11),
   ('Juice', 5, 6, 12),
   ('Pizza', 33, 7, 13),
   ('Salad', 22, 7, 14),

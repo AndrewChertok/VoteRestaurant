@@ -9,6 +9,8 @@ public interface DishService {
 
     Dish save(Dish dish);
 
+    Dish update(Dish dish);
+
     void delete(Integer id);
 
     Dish getById(Integer id);

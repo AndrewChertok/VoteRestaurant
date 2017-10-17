@@ -13,7 +13,7 @@ import java.util.List;
 
 
 @Controller
-public class AbstractRestaurantController {
+public abstract class AbstractRestaurantController {
 
     protected final Logger log = LoggerFactory.getLogger(getClass());
 

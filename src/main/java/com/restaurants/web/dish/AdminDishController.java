@@ -1,5 +1,6 @@
-package com.restaurants.web.restaurant;
+package com.restaurants.web.dish;
 
+import com.restaurants.model.Dish;
 import com.restaurants.model.Restaurant;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
@@ -13,34 +14,28 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping(AdminRestaurantController.URL)
-public class AdminRestaurantController extends AbstractRestaurantController{
+@RequestMapping(AdminDishController.URL)
+public class AdminDishController extends AbstractDishController{
 
-    static final String URL = "/restaurant/admin";
-
-
-   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Restaurant> getAll(){
-        return  super.getAll();
-    }
+    static final String URL = "/dish/admin";
 
 
-    @PostMapping(value = "/create", consumes = MediaType.APPLICATION_JSON_VALUE,  produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Restaurant> adminSave(@RequestBody Restaurant restaurant) {
+    @PostMapping(value = "/create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Dish> adminSave(@RequestBody Dish dish){
 
-        Restaurant created = super.save(restaurant);
+        Dish created = super.save(dish);
 
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path(URL + "/{id}")
                 .buildAndExpand(created.getId()).toUri();
 
-          return ResponseEntity.created(uriOfNewResource).body(created);
+        return ResponseEntity.created(uriOfNewResource).body(created);
     }
 
-
     @PutMapping(value = "/update", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Restaurant> adminUpdate(@RequestBody Restaurant restaurant) {
-        Restaurant updated = super.update(restaurant);
+    public ResponseEntity<Dish> adminUpdate(@RequestBody Dish dish){
+
+        Dish updated = super.update(dish);
 
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path(URL + "/{id}")
@@ -49,26 +44,26 @@ public class AdminRestaurantController extends AbstractRestaurantController{
         return ResponseEntity.created(uriOfNewResource).body(updated);
     }
 
-    @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable("id") int id) {
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable("id")Integer id){
         super.delete(id);
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Restaurant get(@PathVariable("id") int id) {
-        return super.get(id);
+    public Dish getById(@PathVariable("id")Integer id){
+        return super.getById(id);
     }
 
-    @GetMapping(value = "/byName/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Restaurant getByName(@PathVariable("name")String name){
-        return super.getByName(name);
+    @GetMapping(value = "/dishes", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Dish> getAll(){
+        return super.getAll();
     }
 
-
-    @GetMapping(value = "/filter", produces = MediaType.APPLICATION_JSON_VALUE)
-    public  List<Restaurant> getBetweenDates(
+    @GetMapping(value = "/betweendates", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Dish> getBetweenDates(
             @RequestParam(value = "from", required = false)  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
             @RequestParam(value = "to", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
         return super.getBetweenDates(startDate, endDate);
     }
+
 }

@@ -21,6 +21,11 @@ public class DishServiceImpl implements DishService {
     }
 
     @Override
+    public Dish update(Dish dish) {
+        return repository.save(dish);
+    }
+
+    @Override
     public void delete(Integer id) {
         repository.delete(id);
     }

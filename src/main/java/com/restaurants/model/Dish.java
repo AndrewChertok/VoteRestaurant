@@ -7,6 +7,7 @@ import org.hibernate.validator.constraints.Range;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 
 @SuppressWarnings("JpaQlInspection")
 @NamedQueries({
@@ -31,6 +32,10 @@ public class Dish extends BaseEntity{
     @NotNull
     @Range(min = 1, max = 5000)
     private Double price;
+
+    @Column(name = "created", columnDefinition = "DATE")
+    @NotNull
+    private LocalDate createdOrUpdated;
 
     @JoinColumn(name = "restaurant_id", nullable = false)
     @NotNull
@@ -76,6 +81,14 @@ public class Dish extends BaseEntity{
 
     public void setRestaurant(Restaurant restaurant) {
         this.restaurant = restaurant;
+    }
+
+    public LocalDate getCreatedOrUpdated() {
+        return createdOrUpdated;
+    }
+
+    public void setCreatedOrUpdated(LocalDate createdOrUpdated) {
+        this.createdOrUpdated = createdOrUpdated;
     }
 
     @Override
