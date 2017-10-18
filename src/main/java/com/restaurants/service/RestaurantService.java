@@ -1,7 +1,6 @@
 package com.restaurants.service;
 
 import com.restaurants.model.Restaurant;
-
 import java.time.LocalDate;
 import java.util.List;
 

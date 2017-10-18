@@ -1,23 +1,19 @@
 package com.restaurants.model;
 
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import org.hibernate.Hibernate;
-
 import javax.persistence.*;
 
-import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
-import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.NONE;
 
 @MappedSuperclass
 @Access(AccessType.FIELD)
 public class BaseEntity {
 
-    public static final int START_SEQ = 16;
+    public static final int START_SEQ = 1;
 
     @Id
-    @SequenceGenerator(name = "MAIN_SEQ", sequenceName = "MAIN_SEQ", allocationSize = 1, initialValue = START_SEQ)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "MAIN_SEQ")
+    @SequenceGenerator(name = "main_seq", sequenceName = "main_seq", allocationSize = 1, initialValue = START_SEQ)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "main_seq")
     @Access(value = AccessType.PROPERTY)
     protected Integer id;
 

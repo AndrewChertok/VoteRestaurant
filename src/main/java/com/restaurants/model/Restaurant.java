@@ -1,7 +1,9 @@
 package com.restaurants.model;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -35,7 +37,8 @@ public class Restaurant extends BaseEntity{
     private String name;
 
     @CollectionTable(name = "dishes", joinColumns = @JoinColumn(name = "restaurant_id"))
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "restaurant")
+    @JsonManagedReference
     private List<Dish> menu;
 
     @Column(name = "votes")

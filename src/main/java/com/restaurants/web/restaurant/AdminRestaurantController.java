@@ -1,13 +1,12 @@
 package com.restaurants.web.restaurant;
 
-import com.restaurants.model.Dish;
+
 import com.restaurants.model.Restaurant;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import java.net.URI;
 import java.time.LocalDate;
 import java.util.List;

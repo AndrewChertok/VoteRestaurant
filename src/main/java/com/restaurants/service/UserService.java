@@ -1,7 +1,6 @@
 package com.restaurants.service;
 
 import com.restaurants.model.User;
-
 import java.util.List;
 
 public interface UserService {

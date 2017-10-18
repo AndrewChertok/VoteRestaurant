@@ -1,7 +1,7 @@
 package com.restaurants.model;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
@@ -11,9 +11,9 @@ import java.time.LocalDate;
 
 @SuppressWarnings("JpaQlInspection")
 @NamedQueries({
-        @NamedQuery(name = Dish.GET_ALL, query = "SELECT d FROM Dish d order by d.createdOrUpdated DESC "),
-        @NamedQuery(name = Dish.GET_BETWEEN, query = "SELECT d FROM Dish d WHERE d.createdOrUpdated BETWEEN :startDate AND :endDate ORDER BY d.createdOrUpdated DESC "),
-        @NamedQuery(name = Dish.GET_WITH_RESTAURANT, query = "SELECT d FROM Dish d LEFT JOIN FETCH d.restaurant WHERE d.id = :id")
+        @NamedQuery(name = Dish.GET_ALL, query = "SELECT d FROM Dish d order by d.createdOrUpdated DESC"),
+        @NamedQuery(name = Dish.GET_BETWEEN, query = "SELECT d FROM Dish d WHERE d.createdOrUpdated BETWEEN :startDate AND :endDate ORDER BY d.createdOrUpdated DESC"),
+        @NamedQuery(name = Dish.GET, query = "SELECT d FROM Dish d WHERE d.id = :id")
 })
 
 
@@ -24,7 +24,7 @@ public class Dish extends BaseEntity{
 
     public static final String GET_ALL = "Dish.findAll";
     public static final String GET_BETWEEN = "Dish.getBetweenDates";
-    public static final String GET_WITH_RESTAURANT = "Dish.getWithRestaurant";
+    public static final String GET = "Dish.getById";
 
     @Column(name = "name", nullable = false)
     @NotEmpty
@@ -40,8 +40,8 @@ public class Dish extends BaseEntity{
     private LocalDate createdOrUpdated = LocalDate.now();
 
     @JoinColumn(name = "restaurant_id")
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnore
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonBackReference
     private Restaurant restaurant;
 
     public Dish(){

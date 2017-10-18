@@ -1,8 +1,6 @@
 package com.restaurants.repository;
 
 import com.restaurants.model.User;
-
-import java.time.LocalDateTime;
 import java.util.List;
 
 public interface UserRepository {
@@ -17,8 +15,6 @@ public interface UserRepository {
 
     List<User> getAll();
 
-  default void setRestaurantVoted(Integer restId, Integer userId){
-
-  }
+   void setRestaurantVoted(Integer restId, Integer userId);
 
 }

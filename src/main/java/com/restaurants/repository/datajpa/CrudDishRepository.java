@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @Transactional(readOnly = true)
 public interface CrudDishRepository extends JpaRepository<Dish, Integer>{
@@ -23,8 +22,8 @@ public interface CrudDishRepository extends JpaRepository<Dish, Integer>{
     @Override
     void deleteById(Integer id);
 
-    @Query("SELECT d FROM Dish d LEFT JOIN FETCH d.restaurant WHERE d.id = ?1")
-    Dish getWithRestaurant(Integer id);
+    @Query("SELECT d FROM Dish d WHERE d.id = ?1")
+    Dish getById(Integer id);
 
     @Transactional
     @Modifying

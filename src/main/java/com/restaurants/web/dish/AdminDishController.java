@@ -1,7 +1,6 @@
 package com.restaurants.web.dish;
 
 import com.restaurants.model.Dish;
-import com.restaurants.model.Restaurant;
 import com.restaurants.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
