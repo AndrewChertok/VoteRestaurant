@@ -27,8 +27,8 @@ public class ProfileRestaurantController extends AbstractRestaurantController {
         return super.get(id);
     }
 
-    @GetMapping(value = "/byname/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Restaurant getByName(@PathVariable("name")String name){
+    @GetMapping(value = "/by", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Restaurant getByName(@RequestParam("name") String name){
         return super.getByName(name);
     }
 

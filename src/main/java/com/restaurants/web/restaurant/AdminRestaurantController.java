@@ -1,5 +1,6 @@
 package com.restaurants.web.restaurant;
 
+import com.restaurants.model.Dish;
 import com.restaurants.model.Restaurant;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
@@ -25,7 +26,7 @@ public class AdminRestaurantController extends AbstractRestaurantController{
     }
 
 
-    @PostMapping(value = "/create", consumes = MediaType.APPLICATION_JSON_VALUE,  produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping( consumes = MediaType.APPLICATION_JSON_VALUE,  produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Restaurant> adminSave(@RequestBody Restaurant restaurant) {
 
         Restaurant created = super.save(restaurant);
@@ -38,8 +39,12 @@ public class AdminRestaurantController extends AbstractRestaurantController{
     }
 
 
-    @PutMapping(value = "/update", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Restaurant> adminUpdate(@RequestBody Restaurant restaurant) {
+    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Restaurant> adminUpdate(@RequestBody Restaurant restaurant, @PathVariable("id") Integer restaurantId) {
+
+        Restaurant updating = super.get(restaurantId);
+      updating.setName(restaurant.getName());
+
         Restaurant updated = super.update(restaurant);
 
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
@@ -59,8 +64,8 @@ public class AdminRestaurantController extends AbstractRestaurantController{
         return super.get(id);
     }
 
-    @GetMapping(value = "/byname/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Restaurant getByName(@PathVariable("name")String name){
+    @GetMapping(value = "/by", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Restaurant getByName(@RequestParam("name")String name){
         return super.getByName(name);
     }
 

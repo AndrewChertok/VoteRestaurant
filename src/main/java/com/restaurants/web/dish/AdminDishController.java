@@ -25,7 +25,7 @@ public class AdminDishController extends AbstractDishController{
     private RestaurantService restaurantService;
 
 
-    @PostMapping(value = "/create/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Dish> adminSave(@RequestBody Dish dish, @PathVariable("id") Integer restaurantId){
 
         dish.setRestaurant(restaurantService.get(restaurantId));
@@ -39,10 +39,15 @@ public class AdminDishController extends AbstractDishController{
         return ResponseEntity.created(uriOfNewResource).body(created);
     }
 
-    @PutMapping(value = "/update", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Dish> adminUpdate(@RequestBody Dish dish){
+    @PutMapping(value = "/{id}",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Dish> adminUpdate(@RequestBody Dish dish, @PathVariable("id") Integer dishId){
 
-        Dish updated = super.update(dish);
+        Dish updating = super.getById(dishId);
+
+        updating.setName(dish.getName());
+        updating.setPrice(dish.getPrice());
+
+        Dish updated = super.update(updating);
 
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path(URL + "/{id}")
@@ -66,7 +71,7 @@ public class AdminDishController extends AbstractDishController{
         return super.getAll();
     }
 
-    @GetMapping(value = "/betweendates", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/filter", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Dish> getBetweenDates(
             @RequestParam(value = "from", required = false)  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
             @RequestParam(value = "to", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {

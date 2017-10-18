@@ -16,7 +16,7 @@ import java.time.LocalTime;
 @Service
 public class VoteServiceImpl implements VoteService {
 
-    private static final LocalTime EXPIRED_TIME = LocalTime.parse("11:00");
+    private static final LocalTime EXPIRED_TIME = LocalTime.parse("23:00");
 
 
     @Autowired

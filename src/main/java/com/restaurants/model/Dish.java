@@ -41,7 +41,7 @@ public class Dish extends BaseEntity{
 
     @JoinColumn(name = "restaurant_id")
     @ManyToOne(fetch = FetchType.LAZY)
- //   @JsonIgnore
+    @JsonIgnore
     private Restaurant restaurant;
 
     public Dish(){

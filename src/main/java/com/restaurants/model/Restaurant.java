@@ -93,8 +93,8 @@ public class Restaurant extends BaseEntity{
         return menu;
     }
 
-    public void setMenu(Dish... menu) {
-        this.menu = Arrays.asList(menu);
+    public void setMenu(List<Dish> menu) {
+        this.menu = menu;
     }
 
     public LocalDate getCreatedOrUpdated() {

@@ -21,12 +21,12 @@ public class ProfileDishController extends AbstractDishController{
         return super.getById(id);
     }
 
-    @GetMapping(value = "/dishes", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Dish> getAll(){
         return super.getAll();
     }
 
-    @GetMapping(value = "/betweendates", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/filter", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Dish> getBetweenDates(
             @RequestParam(value = "from", required = false)  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
             @RequestParam(value = "to", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
