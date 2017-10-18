@@ -16,7 +16,7 @@ import java.util.List;
 @SuppressWarnings("JpaQlInspection")
 @NamedQueries({
         @NamedQuery(name = Restaurant.GET_ALL, query ="SELECT r FROM Restaurant r order by r.createdOrUpdated DESC "),
-        @NamedQuery(name = Restaurant.GET, query = "SELECT r FROM Restaurant r LEFT JOIN FETCH r.menu WHERE r.id = :id"),
+        @NamedQuery(name = Restaurant.GET, query = "SELECT r FROM Restaurant r WHERE r.id = :id"),
         @NamedQuery(name = Restaurant.GET_BETWEEN, query = "SELECT r FROM Restaurant r WHERE r.createdOrUpdated BETWEEN :startdate AND :endDate ORDER BY r.createdOrUpdated DESC "),
         @NamedQuery(name = Restaurant.SET_VOTE, query ="UPDATE Restaurant r set r.votes = ?1 WHERE r.id = ?2"),
         @NamedQuery(name = Restaurant.GET_BY_NAME, query ="SELECT r FROM Restaurant r WHERE r.name = ?1")

@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @NamedQueries({
         @NamedQuery(name = Dish.GET_ALL, query = "SELECT d FROM Dish d order by d.createdOrUpdated DESC"),
         @NamedQuery(name = Dish.GET_BETWEEN, query = "SELECT d FROM Dish d WHERE d.createdOrUpdated BETWEEN :startDate AND :endDate ORDER BY d.createdOrUpdated DESC"),
-        @NamedQuery(name = Dish.GET, query = "SELECT d FROM Dish d WHERE d.id = :id")
+        @NamedQuery(name = Dish.GET, query = "SELECT d FROM Dish d WHERE d.id = ?1")
 })
 
 
