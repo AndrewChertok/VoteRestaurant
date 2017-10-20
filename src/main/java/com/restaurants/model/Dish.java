@@ -11,8 +11,8 @@ import java.time.LocalDate;
 
 @SuppressWarnings("JpaQlInspection")
 @NamedQueries({
-        @NamedQuery(name = Dish.GET_ALL, query = "SELECT d FROM Dish d order by d.createdOrUpdated DESC"),
-        @NamedQuery(name = Dish.GET_BETWEEN, query = "SELECT d FROM Dish d WHERE d.createdOrUpdated BETWEEN :startDate AND :endDate ORDER BY d.createdOrUpdated DESC"),
+        @NamedQuery(name = Dish.GET_ALL, query = "SELECT d FROM Dish d order by d.created DESC"),
+        @NamedQuery(name = Dish.GET_BETWEEN, query = "SELECT d FROM Dish d WHERE d.created BETWEEN :startDate AND :endDate ORDER BY d.created DESC"),
         @NamedQuery(name = Dish.GET, query = "SELECT d FROM Dish d WHERE d.id = ?1")
 })
 
@@ -37,7 +37,7 @@ public class Dish extends BaseEntity{
 
     @Column(name = "created", columnDefinition = "DATE")
     @NotNull
-    private LocalDate createdOrUpdated = LocalDate.now();
+    private LocalDate created = LocalDate.now();
 
     @JoinColumn(name = "restaurant_id")
     @ManyToOne(fetch = FetchType.EAGER)
@@ -89,8 +89,8 @@ public class Dish extends BaseEntity{
         this.restaurant = restaurant;
     }
 
-    public LocalDate getCreatedOrUpdated() {
-        return createdOrUpdated;
+    public LocalDate getCreated() {
+        return created;
     }
 
     @Override

@@ -2,7 +2,6 @@ package com.restaurants.model;
 
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -15,9 +14,9 @@ import java.util.List;
 
 @SuppressWarnings("JpaQlInspection")
 @NamedQueries({
-        @NamedQuery(name = Restaurant.GET_ALL, query ="SELECT r FROM Restaurant r order by r.createdOrUpdated DESC "),
+        @NamedQuery(name = Restaurant.GET_ALL, query ="SELECT r FROM Restaurant r order by r.created DESC "),
         @NamedQuery(name = Restaurant.GET, query = "SELECT r FROM Restaurant r WHERE r.id = :id"),
-        @NamedQuery(name = Restaurant.GET_BETWEEN, query = "SELECT r FROM Restaurant r WHERE r.createdOrUpdated BETWEEN :startdate AND :endDate ORDER BY r.createdOrUpdated DESC "),
+        @NamedQuery(name = Restaurant.GET_BETWEEN, query = "SELECT r FROM Restaurant r WHERE r.created BETWEEN :startdate AND :endDate ORDER BY r.created DESC "),
         @NamedQuery(name = Restaurant.SET_VOTE, query ="UPDATE Restaurant r set r.votes = ?1 WHERE r.id = ?2"),
         @NamedQuery(name = Restaurant.GET_BY_NAME, query ="SELECT r FROM Restaurant r WHERE r.name = ?1")
 })
@@ -46,7 +45,7 @@ public class Restaurant extends BaseEntity{
 
     @Column(name = "created", columnDefinition = "DATE")
     @NotNull
-    private LocalDate createdOrUpdated = LocalDate.now();
+    private LocalDate created = LocalDate.now();
 
     public Restaurant(){
 
@@ -100,10 +99,28 @@ public class Restaurant extends BaseEntity{
         this.menu = menu;
     }
 
-    public LocalDate getCreatedOrUpdated() {
-        return createdOrUpdated;
+    public LocalDate getCreated() {
+        return created;
     }
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        Restaurant that = (Restaurant) o;
+
+        return name.equals(that.name);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + name.hashCode();
+        return result;
+    }
 
     @Override
     public String toString() {

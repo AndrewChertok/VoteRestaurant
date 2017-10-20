@@ -30,9 +30,9 @@ public interface CrudDishRepository extends JpaRepository<Dish, Integer>{
     @Query("UPDATE Dish d SET d.restaurant = ?1 WHERE d.id = ?2")
     void setRestaurant(Restaurant restaurant, Integer id);
 
-    @Query("SELECT d FROM Dish d order by d.createdOrUpdated DESC ")
+    @Query("SELECT d FROM Dish d order by d.created DESC ")
     List<Dish> findAll();
 
-    @Query("SELECT d FROM Dish d WHERE d.createdOrUpdated BETWEEN :startDate AND :endDate ORDER BY d.createdOrUpdated DESC ")
+    @Query("SELECT d FROM Dish d WHERE d.created BETWEEN :startDate AND :endDate ORDER BY d.created DESC ")
     List<Dish> getBetweenDates(@Param("startDate")LocalDate startDate, @Param("endDate")LocalDate endDate);
 }
