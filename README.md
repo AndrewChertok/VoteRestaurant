@@ -150,11 +150,13 @@ Modification (Access allowed for Admin):
 ### Vote handling
 
 - <a href="http://localhost:8080/vote/5">Vote for Restaurant id 5</a>
+- <a href="http://localhost:8080/vote/">Results of Poll</a>
 
 CURL:
 
      
      curl --user admin@gmail.com:admin http://localhost:8080/vote/5
+     curl --user admin@gmail.com:admin http://localhost:8080/vote/
 
 
 ### Project Description
