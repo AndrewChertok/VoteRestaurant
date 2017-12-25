@@ -83,11 +83,8 @@ public class VoteServiceImpl implements VoteService {
 
     @Override
     public Map<Restaurant, Integer> resultsOfPoll() {
-
      return userRepository.getAll().stream().filter(user->Objects.nonNull(user.getVoteDate())).
                 filter(user -> user.getVoteDate().isEqual(LocalDate.now())).
                 collect(Collectors.toMap(user->restaurantRepository.get(user.getRestaurantId()), i->Integer.valueOf(1), (a,b)->a+b));
-
-
     }
 }

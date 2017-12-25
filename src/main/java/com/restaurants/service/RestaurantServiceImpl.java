@@ -21,7 +21,6 @@ public class RestaurantServiceImpl implements RestaurantService {
         this.repository = repository;
     }
 
-
     @Override
     public Restaurant save(Restaurant restaurant) {
         return repository.save(restaurant);

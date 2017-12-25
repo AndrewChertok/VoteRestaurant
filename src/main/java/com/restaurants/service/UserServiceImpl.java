@@ -25,8 +25,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         this.repository = repository;
     }
 
-
-
     @Override
     public User save(User user) {
         return repository.save(user);
@@ -34,7 +32,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public void delete(int id) {
-
         repository.delete(id);
     }
 

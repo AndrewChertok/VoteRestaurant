@@ -9,22 +9,10 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
-@SuppressWarnings("JpaQlInspection")
-@NamedQueries({
-        @NamedQuery(name = Dish.GET_ALL, query = "SELECT d FROM Dish d order by d.created DESC"),
-        @NamedQuery(name = Dish.GET_BETWEEN, query = "SELECT d FROM Dish d WHERE d.created BETWEEN :startDate AND :endDate ORDER BY d.created DESC"),
-        @NamedQuery(name = Dish.GET, query = "SELECT d FROM Dish d WHERE d.id = ?1")
-})
-
-
 
 @Entity
 @Table(name = "dishes")
 public class Dish extends BaseEntity{
-
-    public static final String GET_ALL = "Dish.findAll";
-    public static final String GET_BETWEEN = "Dish.getBetweenDates";
-    public static final String GET = "Dish.getById";
 
     @Column(name = "name", nullable = false)
     @NotEmpty

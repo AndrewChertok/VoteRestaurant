@@ -40,6 +40,4 @@ public class DataJpaDishRepositoryImpl implements DishRepository {
         return repository.getBetweenDates(startDate, endDate);
     }
 
-
-
 }

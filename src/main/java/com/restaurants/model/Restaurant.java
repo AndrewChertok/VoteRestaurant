@@ -12,24 +12,9 @@ import java.util.Arrays;
 import java.util.List;
 
 
-@SuppressWarnings("JpaQlInspection")
-@NamedQueries({
-        @NamedQuery(name = Restaurant.GET_ALL, query ="SELECT r FROM Restaurant r order by r.created DESC "),
-        @NamedQuery(name = Restaurant.GET, query = "SELECT r FROM Restaurant r WHERE r.id = :id"),
-        @NamedQuery(name = Restaurant.GET_BETWEEN, query = "SELECT r FROM Restaurant r WHERE r.created BETWEEN :startdate AND :endDate ORDER BY r.created DESC "),
-        @NamedQuery(name = Restaurant.SET_VOTE, query ="UPDATE Restaurant r set r.votes = ?1 WHERE r.id = ?2"),
-        @NamedQuery(name = Restaurant.GET_BY_NAME, query ="SELECT r FROM Restaurant r WHERE r.name = ?1")
-})
-
 @Entity
 @Table(name = "restaurants")
 public class Restaurant extends BaseEntity{
-
-    public static final String GET = "Restaurant.getWithDishes";
-    public static final String GET_BETWEEN = "Restaurant.getBetweenDates";
-    public static final String GET_BY_NAME = "Restaurant.getByName";
-    public static final String GET_ALL = "Restaurant.findAll";
-    public static final String SET_VOTE = "Restaurant.setVotes";
 
     @Column(name = "name", nullable = false)
     @NotEmpty
